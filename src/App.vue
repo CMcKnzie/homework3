@@ -14,7 +14,8 @@ const addToDo =() => {
 
   myArray.value.push({
     content: input_content.value,
-    catagory: input_category.value,
+    cateory: input_category.value,
+    done: false,
   })
 
   input_content.value = ''
@@ -41,7 +42,7 @@ const addToDo =() => {
   <h4>What's on your to do list?</h4>
     <input type="text" placeholder ="e.g. Make a video" v-model="input_content"/>
 
-  <h4>Pick a catagory</h4>
+  <h4>Pick a category</h4>
     <div>
       <label>
         <input type = "radio" name = "category" value = "business" v-model= "input_category">
@@ -62,7 +63,17 @@ const addToDo =() => {
 </section>
 
 <section class="todo-list">
-
+<div class="list">
+  <div v-for= "x in myArray" :class= "`todo-item ${x.done ? 'done' : 'not-done'}`" :key="x">
+      <label>
+        <input type="checkbox" v-model="x.done">
+        <span :class="`bubble ${x.cateory}`"></span>
+      </label>
+<div class="todo-content">
+  <input type="text" v-model="x.content"/>
+</div>
+  </div>
+  </div>
 </section>
   </main>
 </template>
